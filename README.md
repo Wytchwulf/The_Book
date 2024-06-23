@@ -8,6 +8,11 @@ This repo is my follow along for the [Rust Book](https://rust-book.cs.brown.edu/
   - [Chapter 1: Getting Started](#chapter-1-getting-started)
   - [Chapter 2: Programming a Guessing Game](#chapter-2-programming-a-guessing-game)
   - [Chapter 3: Common Programming Concepts](#chapter-3-common-programming-concepts)
+      - [3.1. Variables and Mutability](#3.1-variables-and-mutability)
+      - [3.2. Data Types](#3.2-data-types)
+      - [3.3. Functions](#3.3-functions)
+      - [3.4. Comments](#3.4-comments)
+      - [3.5. Control Flow](#3.5-control-flow)
   - [Chapter 4: Understanding Ownership](#chapter-4-understanding-ownership)
   - [Chapter 5: Using Structs to Structure Related Data](#chapter-5-using-structs-to-structure-related-data)
   - [Chapter 6: Enums and Pattern Matching](#chapter-6-enums-and-pattern-matching)
@@ -65,3 +70,32 @@ fn main() {
     }
 }
 ```
+
+## Chapter 3: Common Programming Concepts
+
+### 3.1. Variables and Mutability
+
+```rust
+fn main() {
+    let mut x = 5;
+    println!("The value of x is: {x}");
+    x = 6;
+    println!("The value of x is: {x}");
+}
+```
+
+```rust
+fn main() {
+    let x: i32 = 5;
+    let x: i32 = x + 1;
+
+    {
+        let x: i32 = x * 2;
+        println!("The value of x in the inner scope is: {x}");
+    }
+
+    println!("The value of x is: {x}");
+}
+```
+
+### 3.2. Data Types
