@@ -8,11 +8,14 @@ This repo is my follow along for the [Rust Book](https://rust-book.cs.brown.edu/
   - [Chapter 1: Getting Started](#chapter-1-getting-started)
   - [Chapter 2: Programming a Guessing Game](#chapter-2-programming-a-guessing-game)
   - [Chapter 3: Common Programming Concepts](#chapter-3-common-programming-concepts)
-      - [3.1. Variables and Mutability](#3.1-variables-and-mutability)
-      - [3.2. Data Types](#3.2-data-types)
-      - [3.3. Functions](#3.3-functions)
-      - [3.4. Comments](#3.4-comments)
-      - [3.5. Control Flow](#3.5-control-flow)
+    - [3.1 Variables and Mutability](#31-variables-and-mutability)
+    - [3.2 Data Types](#32-data-types)
+    - [3.3 Functions](#33-functions)
+    - [3.4 Comments](#34-comments)
+    - [3.5 Control Flow](#35-control-flow)
+    - [--EXERCISE-- Convert temperatures between Fahrenheit and Celsius](#exercise-convert-temperatures-between-fahrenheit-and-celsius)
+    - [--EXERCISE-- Generate the nth Fibonacci number](#exercise-generate-the-nth-fibonacci-number)
+    - [--EXERCISE-- Print the lyrics to the Christmas carol "The Twelve Days of Christmas," taking advantage of the repetition in the song](#exercise-print-the-lyrics-to-the-christmas-carol-the-twelve-days-of-christmas-taking-advantage-of-the-repetition-in-the-song)
   - [Chapter 4: Understanding Ownership](#chapter-4-understanding-ownership)
   - [Chapter 5: Using Structs to Structure Related Data](#chapter-5-using-structs-to-structure-related-data)
   - [Chapter 6: Enums and Pattern Matching](#chapter-6-enums-and-pattern-matching)
@@ -354,3 +357,96 @@ fn main() {
 }
 ```
 
+### --EXERCISE-- Convert temperatures between Fahrenheit and Celsius
+
+```rust
+fn main() {
+    let x: f32 = 1.0;
+
+    println!("1 Fahrenheit is equal to {} Celsius", fahrenheit_to_celsius(x));
+    println!("1 Celsius is equal to {} Fahrenheit", celsius_to_fahrenheit(x));
+}
+
+fn fahrenheit_to_celsius(fahrenheit: f32) -> f32 {
+    (fahrenheit - 32.0) * 5.0 / 9.0
+}
+
+fn celsius_to_fahrenheit(celsius: f32) -> f32 {
+    (celsius * 9.0 / 5.0) + 32.0
+}
+```
+
+### --EXERCISE-- Generate the nth Fibonacci number
+
+```rust
+fn main() {
+    let n: i32 = 10;
+
+    println!("The Fibonacci number is: {}", get_fibonacci(n));
+}
+
+fn get_fibonacci(n: i32) -> i32 {
+    if n <= 0 {
+        return 0;
+    } else if n == 1 {
+        return 1;
+    }
+
+    let mut a = 0;
+    let mut b = 1;
+    let mut fib = 0;
+
+    for _ in 2..=n {
+        fib = a + b;
+        a = b;
+        b = fib;
+    }
+
+    fib
+}
+```
+
+### --EXERCISE-- Print the lyrics to the Christmas carol "The Twelve Days of Christmas," taking advantage of the repetition in the song
+
+```rust
+fn main() {
+    let days_of_christmas: u32 = 12;
+
+    let lyrics: Vec<&str> = vec![
+        "A partridge in a pear tree",
+        "Two turtle doves",
+        "Three french hens",
+        "Four calling birds",
+        "Five gold rings",
+        "Six geese a-laying",
+        "Seven swans a-swimming",
+        "Eight maids a-milking",
+        "Nine ladies dancing",
+        "Ten lords a-leaping",
+        "Eleven pipers piping",
+        "Twelve drummers drumming",
+    ];
+
+    for day in 1..=days_of_christmas {
+        println!("On the {} day of Christmas, my true-love gave to me", ordinal(day));
+        for gift_day in (0..day).rev() {
+            if day > 1 && gift_day == 0 {
+                print!("and ");
+            }
+            println!("{}", lyrics[gift_day as usize]);
+        }
+        println!();
+    }
+}
+
+fn ordinal(day: u32) -> String {
+    match day {
+        1 => format!("{}st", day),
+        2 => format!("{}nd", day),
+        3 => format!("{}rd", day),
+        _ => format!("{}th", day),
+    }
+}
+```
+
+## Chapter 4: Understanding Ownership
